@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // 只出现一次的数字
@@ -102,6 +103,46 @@ func isValid(str string) bool {
 		}
 
 	}
-	fmt.Printf("是否是合格括号%t", len(stack) == 0)
+	fmt.Printf("是否是合格括号%t\n", len(stack) == 0)
 	return len(stack) == 0
+}
+
+// 查找字符串数组中的最长公共前缀--逐一和第一个元素比较，不断更新第一个元素
+func longestCommonPrefix1(str []string) string {
+
+	if len(str) == 0 {
+		return ""
+	}
+
+	//取第一个元素和所有元素逐一比较
+	firstStr := str[0]
+
+	for i := 1; i < len(str); i++ {
+		for strings.Index(str[i], firstStr) != 0 {
+			firstStr = firstStr[:len(firstStr)-1]
+			if firstStr == "" {
+				return ""
+			}
+		}
+	}
+	fmt.Println("1输出最长公共：%s\n", firstStr)
+	return firstStr
+}
+
+// 查找字符串数组中的最长公共前缀--同时比较所有元素相同坐标的数据是否相等
+func longestCommonPrefix2(str []string) string {
+
+	if len(str) == 0 {
+		return ""
+	}
+
+	for i := 0; ; i++ {
+		for _, val := range str {
+			if i >= len(val) || (i < len(val) && str[0][i] != val[i]) {
+				fmt.Println("2输出最长公共：%s\n", str[0][:i])
+				return str[0][:i]
+			}
+		}
+	}
+	return ""
 }

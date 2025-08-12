@@ -26,6 +26,9 @@ func main() {
 	isPalindrome(1234321)
 	isPalindrome2(5678998765)
 	isValid("{}[](){()}")
+	llist := []string{"234", "234", "2346456", "23"}
+	longestCommonPrefix1(llist)
+	longestCommonPrefix2(llist)
 }
 
 //TIP See GoLand help at <a href="https://www.jetbrains.com/help/go/">jetbrains.com/help/go/</a>.
