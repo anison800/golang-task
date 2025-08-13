@@ -29,6 +29,7 @@ func main() {
 	llist := []string{"234", "234", "2346456", "23"}
 	longestCommonPrefix1(llist)
 	longestCommonPrefix2(llist)
+	plusOne([]int{9, 9, 9, 9, 9})
 }
 
 //TIP See GoLand help at <a href="https://www.jetbrains.com/help/go/">jetbrains.com/help/go/</a>.

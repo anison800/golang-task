@@ -147,4 +147,17 @@ func longestCommonPrefix2(str []string) string {
 	return ""
 }
 
-//加一 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一
+// 加一 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一
+func plusOne(num []int) []int {
+
+	for i := len(num) - 1; i >= 0; i-- {
+		num[i]++
+		if num[i] < 10 {
+			return num
+		}
+		num[i] = 0
+	}
+	result := append([]int{1}, num...)
+	fmt.Println("加一最终结果", result)
+	return result
+}
