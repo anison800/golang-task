@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -34,6 +35,9 @@ func main() {
 	plusOne([]int{9, 9, 9, 9, 9})
 	twoSum([]int{2, 7, 11, 15}, 18)
 	removeDuplicates([]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4})
+	mergNum := [][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}}
+	merge(mergNum)
+
 }
 
 //TIP See GoLand help at <a href="https://www.jetbrains.com/help/go/">jetbrains.com/help/go/</a>.
@@ -211,7 +215,7 @@ func twoSum(nums []int, target int) []int {
 	return nil
 }
 
-// removeDuplicates 原地删除有序数组中的重复项，返回唯一元素的个数k
+// 删除有序数组中的重复项，返回唯一元素的个数k
 func removeDuplicates(nums []int) int {
 	// 处理空数组情况
 	if len(nums) == 0 {
@@ -228,16 +232,52 @@ func removeDuplicates(nums []int) int {
 			// 慢指针向前移动一位
 			slow++
 			// 将快指针指向的元素复制到慢指针位置
-			fmt.Print("去重复，交换前\n", nums[slow], nums[fast])
+			fmt.Print(nums[slow], nums[fast])
 			nums[slow] = nums[fast]
-			fmt.Print("去重复，交换后\n", nums[slow], nums[fast])
+			fmt.Print("去重复，交换后", nums[slow], nums[fast])
+			fmt.Println("\n")
 
 		}
 		// 如果元素相同，则快指针继续前进，慢指针不动
-		fmt.Print("去重复，for循环次数\n", fast)
 
 	}
 
 	// 唯一元素的个数是慢指针索引 + 1
 	return slow + 1
+}
+
+// 合并区间
+func merge(intervals [][]int) [][]int {
+
+	if len(intervals) == 0 {
+		return intervals
+	}
+	//从小到大排序
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	result := make([][]int, 0)
+	result = append(result, intervals[0])
+
+	for i := 1; i < len(intervals); i++ {
+
+		last := result[len(result)-1]
+		if last[1] >= intervals[i][0] {
+			last[1] = max(intervals[0][1], intervals[i][1])
+		} else {
+			result = append(result, intervals[i])
+		}
+	}
+
+	fmt.Printf("最终%d", result)
+	return result
+}
+
+// 辅助函数：取两个整数的最大值
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
