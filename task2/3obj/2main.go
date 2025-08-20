@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 
 	eployee := Employee{Person: Person{Name: "kakak", Age: 23}, EmployeeID: "9981"}
-	PrintInfo(eployee)
+	eployee.PrintInfo()
 }
 
 type Person struct {
@@ -18,6 +18,6 @@ type Employee struct {
 	EmployeeID string
 }
 
-func PrintInfo(e Employee) {
+func (e *Employee) PrintInfo() {
 	fmt.Printf("打印信息：%s,%s,%d\n", e.EmployeeID, e.Person.Name, e.Person.Age)
 }
